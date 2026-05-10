@@ -12,19 +12,21 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Check Docker') {
             steps {
-                echo 'Building Docker Images'
-
-                sh 'docker compose build'
+                sh 'docker --version'
             }
         }
 
-        stage('Deploy Containers') {
+        stage('Build Backend Image') {
             steps {
-                echo 'Starting Containers'
+                sh 'docker build -t smart-health-backend ./server'
+            }
+        }
 
-                sh 'docker compose up -d'
+        stage('Build Frontend Image') {
+            steps {
+                sh 'docker build -t smart-health-frontend ./web'
             }
         }
 
