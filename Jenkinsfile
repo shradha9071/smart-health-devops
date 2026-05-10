@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Building Docker Images'
 
-                sh 'docker compose build'
+                sh 'docker-compose build'
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'Starting Containers'
 
-                sh 'docker compose up -d'
+                sh 'docker-compose up -d'
             }
         }
 
