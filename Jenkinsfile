@@ -5,30 +5,28 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                echo 'Cloning GitHub Repository'
-
                 git branch: 'main',
+                credentialsId: 'github-token',
                 url: 'https://github.com/shradha9071/smart-health-devops.git'
             }
         }
 
-        stage('Check Docker') {
+        stage('Build Containers') {
             steps {
-                sh 'docker --version'
+                sh 'docker compose build'
             }
         }
 
-        stage('Build Backend Image') {
+        stage('Deploy Containers') {
             steps {
-                sh 'docker build -t smart-health-backend ./server'
+                sh 'docker compose up -d'
             }
         }
 
-        stage('Build Frontend Image') {
+        stage('Clean Unused Docker Images') {
             steps {
-                sh 'docker build -t smart-health-frontend ./web'
+                sh 'docker image prune -f'
             }
         }
-
     }
 }

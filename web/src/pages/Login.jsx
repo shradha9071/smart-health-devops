@@ -56,7 +56,7 @@ function Login({ onLogin }) {
     setError('');
     try {
       const { data } = await api.post('/patients', patientData);
-      onLogin({ ...data, role: 'patient' }, 'patient-token');
+      onLogin({ ...data.data, role: 'patient' }, 'patient-token');
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed');
     } finally {
