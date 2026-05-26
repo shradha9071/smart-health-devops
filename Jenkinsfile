@@ -11,21 +11,33 @@ pipeline {
             }
         }
 
+        stage('Stop Old Containers') {
+            steps {
+                sh 'docker compose down || true'
+            }
+        }
+
         stage('Build Backend Image') {
             steps {
-                sh 'docker build -t smart-health-devops-backend ./server'
+                sh 'docker build --no-cache -t smart-health-devops-backend ./server'
             }
         }
 
         stage('Build Frontend Image') {
             steps {
-                sh 'docker build -t smart-health-devops-frontend ./web'
+                sh 'docker build --no-cache -t smart-health-devops-frontend ./web'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh 'docker compose up -d'
             }
         }
 
         stage('Build Success') {
             steps {
-                echo 'Jenkins CI Build Completed Successfully'
+                echo 'Jenkins CI/CD Deployment Completed Successfully'
             }
         }
     }
