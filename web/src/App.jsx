@@ -8,6 +8,8 @@ import QueueManagement from './pages/QueueManagement';
 import AppointmentBooking from './pages/AppointmentBooking';
 import DisplayBoard from './pages/DisplayBoard';
 import { socket } from './api/axios';
+import Demo from "./pages/Demo"
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -85,6 +87,7 @@ function App() {
       />
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
+      <Route path="/demo" element={<Demo />} />
     </Routes>
   );
 }
