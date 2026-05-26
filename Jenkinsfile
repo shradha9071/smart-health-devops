@@ -32,7 +32,7 @@ pipeline {
         stage('Create Environment File') {
             steps {
                 sh '''
-                echo "MONGO_URI=mongodb://mongodb:27017/smart-health" > server/.env
+                echo "MONGO_URL=mongodb://mongodb:27017/smart-health" > server/.env
                 echo "PORT=4000" >> server/.env
                 '''
             }
