@@ -34,6 +34,7 @@ pipeline {
                 sh '''
                 echo "MONGO_URL=mongodb://mongodb:27017/smart-health" > server/.env
                 echo "PORT=4000" >> server/.env
+                echo "JWT_SECRET=smarthealthsecretkey" >> server/.env
                 '''
             }
         }
