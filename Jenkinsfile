@@ -13,7 +13,7 @@ pipeline {
 
         stage('Stop Old Containers') {
             steps {
-                sh 'docker compose down || true'
+                sh 'docker-compose down || true'
             }
         }
 
@@ -31,7 +31,7 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                sh 'docker compose up -d'
+                sh 'docker-compose up -d'
             }
         }
 
