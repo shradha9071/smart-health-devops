@@ -2,26 +2,18 @@ export default function Demo() {
   return (
     <div style={{
       textAlign: "center",
-      marginTop: "100px",
-      fontFamily: "Arial"
+      marginTop: "100px"
     }}>
       <h1 style={{
         color: "red",
-        fontSize: "50px"
+        fontSize: "60px"
       }}>
-        🚀 Jenkins Auto Deployment Working
+        🚀 Jenkins Auto Deployment SUCCESS
       </h1>
 
       <h2>
         Smart Health DevOps Project
       </h2>
-
-      <p style={{
-        fontSize: "24px"
-      }}>
-        This page was deployed automatically using
-        GitHub + Jenkins + Docker + AWS EC2
-      </p>
     </div>
   )
 }
