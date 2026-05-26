@@ -29,6 +29,15 @@ pipeline {
             }
         }
 
+        stage('Create Environment File') {
+            steps {
+                sh '''
+                echo "MONGO_URI=mongodb://mongodb:27017/smart-health" > server/.env
+                echo "PORT=4000" >> server/.env
+                '''
+            }
+        }
+
         stage('Deploy Application') {
             steps {
                 sh 'docker-compose up -d'
