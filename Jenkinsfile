@@ -5,30 +5,50 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                echo 'Cloning GitHub Repository'
-
                 git branch: 'main',
+                credentialsId: 'github-token',
                 url: 'https://github.com/shradha9071/smart-health-devops.git'
             }
         }
 
-        stage('Check Docker') {
+        stage('Stop Old Containers') {
             steps {
-                sh 'docker --version'
+                sh 'docker-compose down || true'
             }
         }
 
         stage('Build Backend Image') {
             steps {
-                sh 'docker build -t smart-health-backend ./server'
+                sh 'docker build --no-cache -t smart-health-devops-backend ./server'
             }
         }
 
         stage('Build Frontend Image') {
             steps {
-                sh 'docker build -t smart-health-frontend ./web'
+                sh 'docker build --no-cache -t smart-health-devops-frontend ./web'
             }
         }
 
+        stage('Create Environment File') {
+            steps {
+                sh '''
+                echo "MONGO_URL=mongodb://mongodb:27017/smart-health" > server/.env
+                echo "PORT=4000" >> server/.env
+                echo "JWT_SECRET=smarthealthsecretkey" >> server/.env
+                '''
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
+
+        stage('Build Success') {
+            steps {
+                echo 'Jenkins CI/CD Deployment Completed Successfully'
+            }
+        }
     }
 }

@@ -2,24 +2,24 @@ services:
 
   mongodb:
     image: mongo
-    container_name: mongodb
-    ports:
-      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
 
   backend:
     build: ./server
-    container_name: smart-health-backend
     ports:
       - "4000:4000"
     depends_on:
       - mongodb
-    environment:
-      - MONGO_URL=mongodb://mongodb:27017/smarthealth
+    env_file:
+      - ./server/.env
 
   frontend:
     build: ./web
-    container_name: smart-health-frontend
     ports:
       - "5173:5173"
     depends_on:
       - backend
+
+volumes:
+  mongodb_data:

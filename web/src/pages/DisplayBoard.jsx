@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import api from '../api/axios';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:4000');
+const socket = io('http://13.63.186.112:4000');
 
 function DisplayBoard({ onBack }) {
   const [departments, setDepartments] = useState([]);

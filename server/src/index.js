@@ -25,9 +25,14 @@ const io = new Server(server, {
 });
 
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? false : 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'http://13.63.186.112:5173',
+    'http://13.63.186.112'
+  ],
   credentials: true
 }));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(morgan('dev'));
 
