@@ -7,7 +7,7 @@ export default function HomeHero() {
       animate={{ opacity: 1, y: 0 }}
       className="p-10 bg-white rounded-xl shadow-lg text-center mt-10 max-w-3xl mx-auto"
     >
-      <h2 className="text-4xl font-bold text-primary">Smart Healthcare Queue</h2>
+      <h2 className="text-4xl font-bold text-primary">Smart Healthcare Queue using devops</h2>
       <p className="mt-4 text-gray-600">
         Real-time token system, appointment booking, doctor availability, and queue dashboard.
       </p>
