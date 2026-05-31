@@ -69,7 +69,12 @@ pipeline {
                 """
             }
         }
-
+       stage('Seed Database') {
+           steps {
+               sh 'sleep 20'
+               sh 'docker exec smart-health-pipeline-backend-1 node src/seed/seed.js || true'
+            }
+       }
         stage('Build Success') {
             steps {
                 echo 'Jenkins CI/CD Deployment Completed Successfully'
