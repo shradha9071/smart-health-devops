@@ -37,16 +37,23 @@ pipeline {
                 sh 'docker build --no-cache -t smart-health-devops-frontend ./web'
             }
         }
-
         stage('Deploy MongoDB') {
             steps {
-                sh 'docker run -d --name smart-health-pipeline-mongodb-1 mongo'
+                sh '''
+                docker start smart-health-pipeline-mongodb-1 || \
+                docker run -d --name smart-health-pipeline-mongodb-1 mongo
+                   '''
             }
-        }
+        } 
+                            
+                    
+                                     
 
         stage('Deploy Backend') {
             steps {
-                sh """
+                sh '''
+                docker rm -f smart-health-pipeline-backend-1 || true
+
                 docker run -d \
                 --name smart-health-pipeline-backend-1 \
                 --link smart-health-pipeline-mongodb-1:mongodb \
@@ -55,20 +62,22 @@ pipeline {
                 -e PORT=4000 \
                 -p 4000:4000 \
                 smart-health-devops-backend
-                """
-            }
+                '''
+             }
         }
 
-        stage('Deploy Frontend') {
-            steps {
-                sh """
-                docker run -d \
-                --name smart-health-pipeline-frontend-1 \
-                -p 5173:5173 \
-                smart-health-devops-frontend
-                """
-            }
-        }
+       stage('Deploy Frontend') {
+    steps {
+        sh '''
+        docker rm -f smart-health-pipeline-frontend-1 || true
+
+        docker run -d \
+        --name smart-health-pipeline-frontend-1 \
+        -p 5173:5173 \
+        smart-health-devops-frontend
+        '''
+    }
+}
        stage('Seed Database') {
            steps {
                sh 'sleep 20'
