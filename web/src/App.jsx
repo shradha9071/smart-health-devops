@@ -8,6 +8,7 @@ import QueueManagement from './pages/QueueManagement';
 import AppointmentBooking from './pages/AppointmentBooking';
 import DisplayBoard from './pages/DisplayBoard';
 import { socket } from './api/axios';
+import kleteck from "./pages/kleteck";
 
 function App() {
   const [user, setUser] = useState(null);
