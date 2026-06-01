@@ -20,7 +20,9 @@ function PatientDashboard({ user, onLogout }) {
 
   const fetchAppointments = async () => {
     try {
-      const { data } = await api.get(`/appointments`);
+      const response = await api.get(`/appointments`);
+      const data = response.data.data || [];
+
       console.log('All appointments:', data);
       console.log('Current user:', user);
       // Filter appointments for current patient (handle both object and string patient field)
