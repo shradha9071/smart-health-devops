@@ -41,7 +41,13 @@ function PatientDashboard({ user, onLogout }) {
     try {
       console.log('Fetching tokens...');
      const response = await api.get(`/tokens`);
-     const data = response.data.data || [];
+
+    console.log("FULL RESPONSE:", response);
+    console.log("RESPONSE.DATA:", response.data);
+
+const data = response.data.data || [];
+
+console.log("FINAL DATA:", data);
       console.log('All tokens received:', data);
       console.log('Current user object:', user);
       
