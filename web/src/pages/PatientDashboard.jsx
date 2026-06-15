@@ -21,7 +21,7 @@ function PatientDashboard({ user, onLogout }) {
   const fetchAppointments = async () => {
     try {
       const response = await api.get(`/appointments`);
-      const data = response.data.data || [];
+      const data = response.data || [];
 
       console.log('All appointments:', data);
       console.log('Current user:', user);
