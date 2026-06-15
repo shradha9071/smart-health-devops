@@ -27,11 +27,21 @@ function PatientDashboard({ user, onLogout }) {
       console.log('Current user:', user);
       // Filter appointments for current patient (handle both object and string patient field)
       const userAppointments = data.filter(apt => {
-        const patientId = typeof apt.patient === 'object' ? apt.patient._id : apt.patient;
-        const userId = user._id || user.id;
-        console.log('Comparing:', patientId, 'with', userId);
-        return patientId === userId;
-      });
+  console.log("FULL APPOINTMENT:", apt);
+
+  const patientId =
+    typeof apt.patient === 'object'
+      ? apt.patient._id
+      : apt.patient;
+
+  const userId = user._id || user.id;
+
+  console.log("PATIENT ID:", patientId);
+  console.log("USER ID:", userId);
+  console.log("MATCH:", patientId === userId);
+
+  return patientId === userId;
+});
       console.log('User appointments:', userAppointments);
       setAppointments(userAppointments);
     } catch (err) {
